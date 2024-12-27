@@ -5239,6 +5239,8 @@ func Test_GetLoadBalancer(t *testing.T) {
 }
 
 func Test_EnsureLoadBalancer(t *testing.T) {
+	ipModeVIP := v1.LoadBalancerIPModeVIP
+
 	testcases := []struct {
 		name              string
 		droplets          []godo.Droplet
@@ -5319,7 +5321,8 @@ func Test_EnsureLoadBalancer(t *testing.T) {
 			lbStatus: &v1.LoadBalancerStatus{
 				Ingress: []v1.LoadBalancerIngress{
 					{
-						IP: "10.0.0.1",
+						IP:     "10.0.0.1",
+						IPMode: &ipModeVIP,
 					},
 				},
 			},
@@ -5393,7 +5396,8 @@ func Test_EnsureLoadBalancer(t *testing.T) {
 			lbStatus: &v1.LoadBalancerStatus{
 				Ingress: []v1.LoadBalancerIngress{
 					{
-						IP: "10.0.0.1",
+						IP:     "10.0.0.1",
+						IPMode: &ipModeVIP,
 					},
 				},
 			},
@@ -5466,7 +5470,8 @@ func Test_EnsureLoadBalancer(t *testing.T) {
 			lbStatus: &v1.LoadBalancerStatus{
 				Ingress: []v1.LoadBalancerIngress{
 					{
-						IP: "10.0.0.1",
+						IP:     "10.0.0.1",
+						IPMode: &ipModeVIP,
 					},
 				},
 			},
@@ -5543,7 +5548,8 @@ func Test_EnsureLoadBalancer(t *testing.T) {
 			lbStatus: &v1.LoadBalancerStatus{
 				Ingress: []v1.LoadBalancerIngress{
 					{
-						IP: "10.0.0.1",
+						IP:     "10.0.0.1",
+						IPMode: &ipModeVIP,
 					},
 				},
 			},
@@ -5640,7 +5646,8 @@ func Test_EnsureLoadBalancer(t *testing.T) {
 			lbStatus: &v1.LoadBalancerStatus{
 				Ingress: []v1.LoadBalancerIngress{
 					{
-						IP: "10.0.0.1",
+						IP:     "10.0.0.1",
+						IPMode: nil,
 					},
 				},
 			},

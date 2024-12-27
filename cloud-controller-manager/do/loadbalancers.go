@@ -149,6 +149,7 @@ func (l *loadBalancers) GetLoadBalancer(ctx context.Context, clusterName string,
 		Ingress: []v1.LoadBalancerIngress{
 			{
 				IP: lb.IP,
+				// TODO: Should this include IPMode?
 			},
 		},
 	}, true, nil
@@ -244,10 +245,22 @@ func (l *loadBalancers) EnsureLoadBalancer(ctx context.Context, clusterName stri
 		}, nil
 	}
 
+	ipMode := v1.LoadBalancerIPModeVIP
+
+	enableProxyProtocol, err := getEnableProxyProtocol(service)
+	if err != nil {
+		return nil, err
+	}
+
+	if enableProxyProtocol {
+		ipMode = v1.LoadBalancerIPModeProxy
+	}
+
 	return &v1.LoadBalancerStatus{
 		Ingress: []v1.LoadBalancerIngress{
 			{
-				IP: lb.IP,
+				IP:     lb.IP,
+				IPMode: &ipMode,
 			},
 		},
 	}, nil
